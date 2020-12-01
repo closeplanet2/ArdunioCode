@@ -43,5 +43,5 @@ void sendMessage(const char *data, int l){
 
   //send our data back through the bluetooth module.
   my_serial.write(data);
-  my_serial.flush();
+  //my_serial.flush();//
 }
