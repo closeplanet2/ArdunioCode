@@ -1,6 +1,10 @@
 #include <SoftwareSerial.h>
+#include <LiquidCrystal.h>
+#include <OneButton.h>
 
 SoftwareSerial my_serial(10, 11);
+
+LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
 
 String pumpOneLquid = "Empty";
 String pumpTwoLquid = "Empty";
@@ -9,39 +13,45 @@ String pumpFourLquid = "Empty";
 String pumpFiveLquid = "Empty";
 String pumpSixLquid = "Empty";
 
-void setup() {
-  pinMode(13, OUTPUT);
-  Serial.begin(9600);
-  my_serial.begin(9600);  
+OneButton buttonOne(53, true); 
+OneButton buttonTwo(52, true); 
+OneButton buttonThree(51, true); 
+OneButton buttonFour(50, true); 
+
+int currentPage = 0;
+boolean isMainMenu = true;
+boolean isIngridentsMenu = false;
+boolean isChanginIngridentMenu = false;
+boolean listeningMessageMenu = false;
+
+String ingridents[] = {"Empty","Vodka","Rum", "Cider"};
+
+//What ingrident am i changing?
+int changingIngrident;
+
+void SetPump(String val){
+  switch (changingIngrident) {
+      case 0:
+        pumpOneLquid = val;
+        break;
+      case 1:
+        pumpTwoLquid = val;
+        break;
+      case 2:
+        pumpThreeLquid = val;
+        break;
+      case 3:
+        pumpFourLquid = val;
+        break;
+      case 4:
+        pumpFiveLquid = val;
+        break;
+      case 5:
+        pumpSixLquid = val;
+        break;
+      default:
+        lcd.setCursor(0, 0);
+        lcd.print("Error!");
+      break;
+   }
 }
-
-void loop() {
-  if(my_serial.available()){
-    recieveMessage();
-  }
-}
-
-void recieveMessage(){
-  char msg[2];
-  msg[0] = my_serial.read();
-  msg[1] = my_serial.read();
-
-  if(msg[0] == 'A'){
-    CreatePumpMessage(pumpOneLquid,pumpTwoLquid,pumpThreeLquid,pumpFourLquid,pumpFiveLquid,pumpSixLquid);
-  }
-}
-
-void sendMessage(const char *data, int l){
-  byte len[4];
-  len[0] = 85; //preamble
-  len[1] = 85; //preamble
-  len[2] = (l >> 8) & 0x000000FF;
-  len[3] = (l & 0x000000FF);
-  my_serial.write(len, 4);
-  my_serial.flush();
-  my_serial.write(data);
-  my_serial.flush();
-}
-
-//A = Send back what liquids are set in each pump
-//a = set the liquids which are in each pump
