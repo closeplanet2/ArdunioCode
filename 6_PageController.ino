@@ -3,11 +3,17 @@ int NextPage(int add){
   int max = 0;
 
   if(isMainMenu){
-    max = 1;
+    max = 2;
   }else if(isIngridentsMenu){
     max = 5;
   }else if(isChanginIngridentMenu){
     max = 3;
+  }else if(RecipeListMenu){
+    max = 0 + recipeMasterList.Count();
+  }else if(createNewNameMenu){
+    max = 25;
+  }else if(mainPageForNewRecipe){
+    max = 0;
   }
 
   currentPage += add;
@@ -30,6 +36,12 @@ void DisplayScreen(){
     DisplayIngridentsChangeMenu();
   }else if(listeningMessageMenu){
     DisplayReivedMessagePage();
+  }else if(RecipeListMenu){
+    DisplayRecipeListPage();
+  }else if(createNewNameMenu){
+    DisplaySetNewNamePage();
+  }else if(mainPageForNewRecipe){
+    DisplayMainMenuForCreateREcipe();
   }
 }
 

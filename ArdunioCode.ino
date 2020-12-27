@@ -2,10 +2,33 @@
 #include <LiquidCrystal.h>
 #include <OneButton.h>
 #include <EEPROM.h>
+#include "ListLib.h"
 
+#define MY_SIZE 4
 SoftwareSerial my_serial(10, 11);
-
 LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
+OneButton buttonOne(53, true); 
+OneButton buttonTwo(52, true); 
+OneButton buttonThree(51, true); 
+OneButton buttonFour(50, true); 
+
+String alapbet[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","_"};
+String ingridents[] = {"Empty","Vodka","Rum", "Cider"};
+List<List<String>> recipeMasterList;
+List<String> currentRecipe;
+String currentName = "";
+int currentPos = 0;
+
+int currentPage = 0;
+int changingIngrident;
+
+boolean isMainMenu = true;
+boolean isIngridentsMenu = false;
+boolean isChanginIngridentMenu = false;
+boolean listeningMessageMenu = false;
+boolean RecipeListMenu = false;
+boolean createNewNameMenu = false;
+boolean mainPageForNewRecipe = false;
 
 String pumpOneLquid = "Empty";
 String pumpTwoLquid = "Empty";
@@ -13,26 +36,6 @@ String pumpThreeLquid = "Empty";
 String pumpFourLquid = "Empty";
 String pumpFiveLquid = "Empty";
 String pumpSixLquid = "Empty";
-
-OneButton buttonOne(53, true); 
-OneButton buttonTwo(52, true); 
-OneButton buttonThree(51, true); 
-OneButton buttonFour(50, true); 
-
-int currentPage = 0;
-boolean isMainMenu = true;
-boolean isIngridentsMenu = false;
-boolean isChanginIngridentMenu = false;
-boolean listeningMessageMenu = false;
-
-#define MY_SIZE 4
-String ingridents[] = {"Empty","Vodka","Rum", "Cider"};
-
-//What ingrident am i changing?
-int changingIngrident;
-
-void writeString(char add,String data);
-String read_String(char add);
 
 void SetPump(String val){
   switch (changingIngrident) {

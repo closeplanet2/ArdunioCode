@@ -8,6 +8,7 @@ void setup() {
   buttonTwo.attachClick(Button2);  
   buttonThree.attachClick(Button3); 
   buttonFour.attachClick(Button4); 
+  buttonThree.attachDoubleClick(Button3_DoubleClick);
 
   pinMode(13, OUTPUT);
 

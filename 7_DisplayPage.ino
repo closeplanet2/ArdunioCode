@@ -10,6 +10,10 @@ void DisplayMainMenu(){
       lcd.setCursor(0, 1);
       lcd.print("Messages!");
       break;
+    case 2:
+      lcd.setCursor(0, 0);
+      lcd.print("Recipes!");
+      break;
     default:
       lcd.setCursor(0, 0);
       lcd.print("Error!");
@@ -65,6 +69,33 @@ void DisplayIngridentsMenu(){
 void DisplayIngridentsChangeMenu(){
   lcd.setCursor(0, 0);
   lcd.print(ingridents[currentPage]);
+}
+
+void DisplayRecipeListPage(){
+  if(currentPage == 0){
+    lcd.setCursor(0, 0);
+    lcd.print("New Recipe!");
+  }else{
+    lcd.setCursor(0, 0);
+    List<String> list = recipeMasterList[currentPage-1];
+    String name = list[0];
+    lcd.print(name);
+  }
+}
+
+void DisplaySetNewNamePage(){
+   lcd.setCursor(0, 0);
+   lcd.print(currentName);
+   lcd.setCursor(currentPos, 0);
+   lcd.print(alapbet[currentPage]);
+   lcd.setCursor(0, 1);
+   String name = "Current:" + alapbet[currentPage];
+   lcd.print(name);
+}
+
+void DisplayMainMenuForCreateREcipe(){
+  lcd.setCursor(0, 0);
+  lcd.print(currentRecipe[0]);
 }
 
 void DisplayReivedMessagePage(){

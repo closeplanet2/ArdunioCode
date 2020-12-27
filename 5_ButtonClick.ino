@@ -32,7 +32,36 @@ void Button3(){
   }else if(isMainMenu && currentPage == 1){
     listeningMessageMenu = true;
     isMainMenu = false;
+  }else if(isMainMenu && currentPage ==  2){
+    RecipeListMenu = true;
+    isMainMenu = false;
+  }else if(RecipeListMenu && currentPage == 0){
+    RecipeListMenu = false;
+    createNewNameMenu = true;
+    currentRecipe.Clear();
+  }else if(createNewNameMenu){
+    currentPos++;
+    currentName += alapbet[currentPage];
+    Serial.print(currentName);
   }
+
+  currentPage = 0;
+  DisplayScreen();
+}
+
+void Button3_DoubleClick(){
+  if(createNewNameMenu){
+    currentPos = 0;
+    currentName += alapbet[currentPage];
+    Serial.print("Name:" + currentName);
+    currentRecipe.Add(currentName);
+    currentName = "";
+    createNewNameMenu = false;
+    mainPageForNewRecipe = true;
+    
+  }
+  
+  currentPage = 0;
   DisplayScreen();
 }
 
@@ -48,6 +77,20 @@ void Button4(){
   }else if(listeningMessageMenu){
      isMainMenu = true;
      listeningMessageMenu = false;
+  }else if(RecipeListMenu){
+    RecipeListMenu = false;
+    isMainMenu = true;
+  }else if(createNewNameMenu){
+    RecipeListMenu = true;
+    createNewNameMenu = false;
+    currentName = "";
+    currentPos = 0;
+  }else if(mainPageForNewRecipe){
+    mainPageForNewRecipe = false;
+    isMainMenu = true;
+    currentName = "";
+    currentPos = 0;
+    recipeMasterList.Add(currentRecipe);
   }
   DisplayScreen();
 }
