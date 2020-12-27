@@ -3,13 +3,18 @@ void recieveMessage(){
   msg[0] = my_serial.read();
   msg[1] = my_serial.read();
 
+  Serial.write(msg[0]);
+
   if(msg[0] == 'A'){
     CreatePumpMessage("a;" + pumpOneLquid + ";" + pumpTwoLquid + ";" + pumpThreeLquid + ";" + pumpFourLquid + ";" + pumpFiveLquid + ";" + pumpSixLquid);
   }
 
-  if(listeningMessageMenu){
-     lcd.setCursor(0, 1);
-     lcd.print(msg[0]);
+  if(msg[0] == 'B'){
+    String one = "b;";
+    for(int i = 0; i < MY_SIZE; i++){
+      one += ingridents[i] + ";";
+    }
+    CreatePumpMessage(one);
   }
 }
 

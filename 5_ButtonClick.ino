@@ -6,12 +6,12 @@ void CheckButtons(){
 }
 
 void Button1(){
-  currentPage = NextPage(1);
+  currentPage = NextPage(-1);
   DisplayScreen();
 }
 
 void Button2(){
-  currentPage = NextPage(-1);
+  currentPage = NextPage(1);
   DisplayScreen();
 }
 

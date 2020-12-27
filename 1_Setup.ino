@@ -8,4 +8,8 @@ void setup() {
   buttonTwo.attachClick(Button2);  
   buttonThree.attachClick(Button3); 
   buttonFour.attachClick(Button4); 
+
+  pinMode(13, OUTPUT);
+
+  LoadAllDataFromEEPROM();
 }

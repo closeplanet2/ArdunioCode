@@ -1,6 +1,7 @@
 #include <SoftwareSerial.h>
 #include <LiquidCrystal.h>
 #include <OneButton.h>
+#include <EEPROM.h>
 
 SoftwareSerial my_serial(10, 11);
 
@@ -24,10 +25,14 @@ boolean isIngridentsMenu = false;
 boolean isChanginIngridentMenu = false;
 boolean listeningMessageMenu = false;
 
+#define MY_SIZE 4
 String ingridents[] = {"Empty","Vodka","Rum", "Cider"};
 
 //What ingrident am i changing?
 int changingIngrident;
+
+void writeString(char add,String data);
+String read_String(char add);
 
 void SetPump(String val){
   switch (changingIngrident) {
@@ -54,4 +59,5 @@ void SetPump(String val){
         lcd.print("Error!");
       break;
    }
+  SaveAllDataToEEPRom();
 }
