@@ -13,4 +13,6 @@ void setup() {
   pinMode(13, OUTPUT);
 
   LoadAllDataFromEEPROM();
+
+  recipeMasterList = ReturnTempRecipeData();
 }

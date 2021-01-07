@@ -42,7 +42,6 @@ void Button3(){
   }else if(createNewNameMenu){
     currentPos++;
     currentName += alapbet[currentPage];
-    Serial.print(currentName);
   }
 
   currentPage = 0;
@@ -53,12 +52,10 @@ void Button3_DoubleClick(){
   if(createNewNameMenu){
     currentPos = 0;
     currentName += alapbet[currentPage];
-    Serial.print("Name:" + currentName);
     currentRecipe.Add(currentName);
     currentName = "";
     createNewNameMenu = false;
     mainPageForNewRecipe = true;
-    
   }
   
   currentPage = 0;

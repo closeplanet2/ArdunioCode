@@ -79,6 +79,7 @@ void DisplayRecipeListPage(){
     lcd.setCursor(0, 0);
     List<String> list = recipeMasterList[currentPage-1];
     String name = list[0];
+    Serial.print(name);
     lcd.print(name);
   }
 }

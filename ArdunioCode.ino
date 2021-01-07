@@ -5,8 +5,8 @@
 #include "ListLib.h"
 
 #define MY_SIZE 4
-SoftwareSerial my_serial(10, 11);
-LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
+SoftwareSerial my_serial(11, 12);
+LiquidCrystal lcd(5, 6, 7, 8, 9, 10);
 OneButton buttonOne(53, true); 
 OneButton buttonTwo(52, true); 
 OneButton buttonThree(51, true); 
